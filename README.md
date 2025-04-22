@@ -33,4 +33,4 @@ Menampilkan notifikasi singkat (popup) di layar
 }
 
 
-untuk codingan full dan gambar aplikasi ada di file
+untuk codingan full dan gambar aplikasi ada di file pdf
