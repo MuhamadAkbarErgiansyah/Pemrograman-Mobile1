@@ -3,14 +3,14 @@ package com.example.bookingkonsultasi
 import android.app.DatePickerDialog
 import android.content.DialogInterface
 import android.os.Bundle
+import android.util.Log // <-- Tambahkan ini
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.example.bookingkonsultasi.R
-import java.util.*
+import java.util.Calendar
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,7 +25,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main) // Connect to the XML layout
+        setContentView(R.layout.activity_main)
+
+        Log.d("MainActivity", "Aplikasi dimulai")
 
         // Initialize views
         etNama = findViewById(R.id.etNama)
@@ -38,11 +40,14 @@ class MainActivity : AppCompatActivity() {
 
         // Set click listener for date picker button
         btnPilihTanggal.setOnClickListener {
+            Log.d("MainActivity", "Tombol pilih tanggal ditekan")
             showDatePickerDialog()
         }
 
         // Set click listener for submit button
         btnSubmit.setOnClickListener {
+            Log.d("MainActivity", "Tombol Submit ditekan")
+            Log.d("MainActivity", "Data input: Nama=${etNama.text}, NIM=${etNim.text}, Fakultas=${etFakultas.text}, Phone=${etPhone.text}, Tanggal=$selectedDate")
             showConfirmationDialog()
         }
     }
@@ -53,11 +58,11 @@ class MainActivity : AppCompatActivity() {
         val month = calendar.get(Calendar.MONTH)
         val day = calendar.get(Calendar.DAY_OF_MONTH)
 
-        // Create and show the date picker dialog
         val datePickerDialog = DatePickerDialog(this,
             { _, selectedYear, selectedMonth, selectedDay ->
                 selectedDate = "$selectedDay/${selectedMonth + 1}/$selectedYear"
-                tvTanggal.text = selectedDate // Update the TextView with the selected date
+                tvTanggal.text = selectedDate
+                Log.d("MainActivity", "Tanggal dipilih: $selectedDate")
             }, year, month, day)
         datePickerDialog.show()
     }
@@ -68,12 +73,14 @@ class MainActivity : AppCompatActivity() {
             .setMessage("Apakah Anda yakin ingin memesan konsultasi pada tanggal $selectedDate?")
             .setPositiveButton("Ya") { _: DialogInterface, _: Int ->
                 Toast.makeText(this, "Pemesanan berhasil!", Toast.LENGTH_SHORT).show()
+                Log.d("MainActivity", "Pemesanan dikonfirmasi oleh user.")
             }
             .setNegativeButton("Tidak") { dialog: DialogInterface, _: Int ->
-                dialog.dismiss() // Dismiss the dialog
+                dialog.dismiss()
+                Log.d("MainActivity", "Pemesanan dibatalkan oleh user.")
             }
 
         val alertDialog = builder.create()
-        alertDialog.show() // Show the confirmation dialog
+        alertDialog.show()
     }
 }
