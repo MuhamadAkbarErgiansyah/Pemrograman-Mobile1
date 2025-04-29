@@ -32,5 +32,8 @@ Menampilkan notifikasi singkat (popup) di layar
     Toast.makeText(this, "Pemesanan berhasil!", Toast.LENGTH_SHORT).show()
 }
 
+4) Latihan Debugging
+   untuk file baru disimpan di branch main
+
 
 untuk codingan full dan gambar aplikasi ada di file pdf
